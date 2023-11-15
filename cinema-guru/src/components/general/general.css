@@ -1,0 +1,18 @@
+.input-wrapper, .select-wrapper, .search-bar {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input, select, button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    cursor: pointer;
+  }
