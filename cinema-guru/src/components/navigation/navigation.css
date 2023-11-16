@@ -1,0 +1,20 @@
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #333; /* Example background color */
+    color: white;
+  }
+  
+  .header-nav img {
+    border-radius: 50%;
+  }
+  
+  .logout-span {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px; /* Adjust space between icon and text if you have an icon */
+  }
+  

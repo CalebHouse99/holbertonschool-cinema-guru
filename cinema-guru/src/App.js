@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Authentication from './routes/auth/Authentication';
+import Dashboard from './routes/dashboard/Dashboard';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,8 +19,10 @@ function App() {
       })
       .then(response => response.json())
       .then(data => {
-        setIsLoggedIn(true);
-        setUserUsername(data.username);
+        if (data.username) {
+          setIsLoggedIn(true);
+          setUserUsername(data.username);
+        }
       })
       .catch(error => {
         console.error('Error:', error);
@@ -26,11 +30,20 @@ function App() {
     }
   }, []);
 
-  if (isLoggedIn) {
-    return <div>Dashboard: {userUsername} is logged in</div>;
-  } else {
-    return <Authentication setIsLoggedIn={setIsLoggedIn} setUserUsername={setUserUsername} />;
-  }
+  return (
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={isLoggedIn ? <Dashboard userUsername={userUsername} /> : <Navigate to="/login" />}
+          />
+          <Route path="/login" element={<Authentication setIsLoggedIn={setIsLoggedIn} setUserUsername={setUserUsername} />} />
+          <Route path="*" element={<Navigate to="/dashboard" />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
